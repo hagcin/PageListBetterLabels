@@ -1,0 +1,10 @@
+.label-image{
+	display:inline-block;
+	vertical-align:middle;
+	margin: 0;
+	padding: 0;
+	margin-right: 0.6em;
+}
+.label-image img{
+	display:block;
+}
