@@ -7,7 +7,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         return array(
             'title' => 'Page List Better Labels',
             'summary' => 'Customize label separator and allow for "template" words that do not get proccessed.',
-            'version' => 103,
+            'version' => 104,
             'autoload' => true
         );
     }
