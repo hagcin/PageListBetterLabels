@@ -92,7 +92,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
 
             // handle the image field (taken from Soma's PageListImageLabel)
-            if($v instanceof Pageimages){
+            if($v instanceof Pageimages && !$subfield){
 
                 $styles = " style='border:".$options['imageStyleBorder'].";'";
 
