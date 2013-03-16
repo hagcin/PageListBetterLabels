@@ -3,10 +3,14 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
     protected $pageLabelField = 'title';
 
-    static public function getModuleInfo() {
+    public static function getModuleInfo() {
         return array(
             'title' => 'Page List Better Labels',
+<<<<<<< HEAD
             'summary' => 'Customize label separator and allow for "template" words that do not get proccessed.',
+=======
+            'summary' => 'Customize label separator and allow for "label" words that do not get proccessed.',
+>>>>>>> Fixed date output
             'version' => 104,
             'autoload' => true
         );
@@ -27,16 +31,15 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
     public function buildLabels($event){
 
-
         $options = self::$defaults;
         foreach($options as $key => $unused) {
             $options[$key] = $this->get($key) ? $this->get($key) : $options[$key];
         }
 
         $event->replace = true;
-
         $page = $event->arguments('page');
-        $page->of(false);
+
+        // $page->of(false);  not sure why this was ever used...
 
         $value = '';
 
@@ -56,7 +59,6 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
             $beforeLabel = "";
             $has_thumb = false;
-
 
 
             if ( substr($field, -2, 2) == "--" ) { // check to see if a the last 2 charactera are "--"
@@ -121,16 +123,14 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
                         $thumb_url = $page->$field->first()->size($sizeWidth,$sizeHeight)->url;
                     }
                 }
+
                 if($thumb_url){
-                    // $thumb_url .= "?vt=" . time();
-                    $v = "<span class='label-image'{$styles}><img src='" . $thumb_url . "'/></span>";
+                    $v = "<span class='label-image' {$styles} ><img src='" . $thumb_url . "'/></span>";
                     $has_thumb = true;
                 } else{
                     $v = "";
                 }
             }
-
-
 
             if($subfield && is_object($v)) {
                 if($v instanceof WireArray && count($v)) $v = $v->first();
