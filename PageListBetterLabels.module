@@ -7,7 +7,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         return array(
             'title' => 'Page List Better Labels',
             'summary' => 'Customize label separator and allow for "label" words that do not get proccessed.',
-            'version' => 104,
+            'version' => 105,
             'autoload' => true
         );
     }
@@ -35,7 +35,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         $event->replace = true;
         $page = $event->arguments('page');
 
-        // $page->of(false);  not sure why this was ever used...
+        $page->of(false);  // needs to be off to support image output
 
         $value = '';
 
@@ -134,6 +134,8 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
             } else if(($field == 'created' || $field == 'modified') && ctype_digit("$v")) {
                 $v = date($this->fuel('config')->dateFormat, (int) $v);
+            } else if( $this->fields->get($field)->type == "FieldtypeDatetime" && ctype_digit("$v")) {
+                $v = date($this->fields->get($field)->dateOutputFormat, (int) $v); // manually format datetime fields based on output format setting
             }
 
 
