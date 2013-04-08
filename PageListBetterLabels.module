@@ -49,7 +49,16 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         if(strpos($pageLabelField, ' ')) $fields = explode(' ', $pageLabelField);
             else $fields = array($pageLabelField);
 
-
+        // get thumbnail size setting
+        if(strpos($options['pageLabelImageSize'], ",")){
+            $size = explode(",", $options['pageLabelImageSize']);
+            $sizeWidth = $size[0];
+            $sizeHeight = $size[1];
+        }
+        else{
+            $sizeWidth = $options['pageLabelImageSize'];
+            $sizeHeight = $options['pageLabelImageSize'];
+        }
 
         foreach($fields as $field) {
 
@@ -95,18 +104,6 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
                 $styles = " style='border:".$options['imageStyleBorder'].";'";
 
                 $thumb_url = '';
-
-                $size = explode(",", $options['pageLabelImageSize']);
-
-                if(is_array($size)) {
-                    $sizeWidth = $size[0];
-                    $sizeHeight = $size[1];
-                } else{
-                     $sizeWidth = $options['pageLabelImageSize'];
-                     $sizeHeight = $options['pageLabelImageSize'];
-                }
-
-
 
                 // if image field is of type cropimage (thumbnails module)
                 if($this->fields->get($field)->type == "FieldtypeCropImage" && $subfield){
