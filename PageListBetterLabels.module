@@ -7,7 +7,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         return array(
             'title' => 'Page List Better Labels',
             'summary' => 'Customize label separator and allow for "label" words that do not get proccessed.',
-            'version' => 105,
+            'version' => 106,
             'autoload' => true
         );
     }
@@ -21,10 +21,14 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
 
 	public function init() {
-        $this->config->styles->add($this->config->urls->PageListBetterLabels . "PageListBetterLabels.css");
+
+        $this->addHookAfter('ProcessPageList::execute', $this, 'loadStyles');
         $this->addHookBefore('ProcessPageListRender::getPageLabel', $this, 'buildLabels');
 	}
 
+    public function loadStyles($event){
+        $this->config->styles->add($this->config->urls->PageListBetterLabels . "PageListBetterLabels.css");
+    }
     public function buildLabels($event){
 
         $options = self::$defaults;
