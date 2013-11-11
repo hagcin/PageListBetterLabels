@@ -7,7 +7,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         return array(
             'title' => 'Page List Better Labels',
             'summary' => 'Customize label separator and allow for "label" words that do not get proccessed.',
-            'version' => 106,
+            'version' => 107,
             'autoload' => true
         );
     }
@@ -103,7 +103,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
 
 
             // handle the image field (taken from Soma's PageListImageLabel)
-            if($v instanceof Pageimages){
+            if($v instanceof Pageimages && $subfield == ''){
 
                 $styles = " style='border:".$options['imageStyleBorder'].";'";
 
