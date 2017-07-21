@@ -7,7 +7,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         return array(
             'title' => 'Page List Better Labels',
             'summary' => 'Customize label separator and allow for "label" words that do not get proccessed.',
-            'version' => 107,
+            'version' => 108,
             'autoload' => true
         );
     }
@@ -42,6 +42,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         $page->of(false);  // needs to be off to support image output
 
         $value = '';
+        $skipSep = false;
 
         // if the page's template specifies a pageLabelField, use that
         $pageLabelField = trim($page->template->pageLabelField);
@@ -67,6 +68,7 @@ class PageListBetterLabels extends WireData implements Module, ConfigurableModul
         foreach($fields as $field) {
 
             $beforeLabel = "";
+            $afterLabel = "";
             $has_thumb = false;
 
 
